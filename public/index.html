@@ -56,24 +56,26 @@
       </div>
 
       <div>
-        <label for="loginId">Login ID:</label>
+        <label for="loginId">Login ID: <br><small>must be of 8 characters containing uppercase, lowercase and numbers</small></label>
         <input
           type="text"
           id="loginId"
           name="loginId"
           pattern="[a-zA-Z0-9]{8}"
           required
+         placeholder="eg. Ronak123"
         />
       </div>
 
       <div>
-        <label for="password">Password:</label>
+        <label for="password">Password:<br><small>must be of 9 characters containing uppercase, lowercase, numbers and symbols</small></label>
         <input
           type="password"
           id="password"
           name="password"
           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{9,}$"
           required
+          placeholder="eg. Ronak@123"
         />
       </div>
 
@@ -81,6 +83,9 @@
     </form>
     <button class="show"onclick="toggleContent()"id="toggleButton">Show All</button>
     <div id="data"></div>
+    <div class="notification-container">
+      <h2 id="notification">Hello</h2>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
