@@ -3,7 +3,7 @@ body {
     font-family: "Poppins", sans-serif;
   }
 #myForm{
-    width: 300px;
+    width: 400px;
     margin: auto;
 }
 #myForm div{
@@ -16,11 +16,20 @@ label{
     font-size: 16px;
     color: crimson;
 }
+small{
+    font-size: 8px;
+}
+input::placeholder{
+    font-size: 12px;
+    color: rgba(165, 165, 165, 0.775);
+}
 input{
     outline: none;
     padding: 8px 12px;
     border: 1px solid rgb(255, 176, 192);
     border-radius: 4px;
+    width: 250px;
+
 }
 #data{
     width: 400px;
@@ -53,4 +62,16 @@ h2{
     text-align: center;
     display: block;
     margin: -60px auto 0px;
+}
+.notification-container{
+    position: absolute;
+    right: 30px;
+    top: 30px;
+}
+#notification{
+    font-size: 16px;
+    color: #fff;
+    background-color: green;
+    padding: 8px 14px;
+    display: none;
 }
