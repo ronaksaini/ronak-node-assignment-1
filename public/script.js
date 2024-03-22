@@ -1,9 +1,11 @@
-
+// Function to fetch and display all data
 function fetchDataAndDisplay() {
     fetch('/data')
     .then(response => response.json())
     .then(data => {
+        // Clear existing content
         document.getElementById('data').innerHTML = '';
+        // Append each data entry to the page
         data.forEach(entry => {
             const entryElement = document.createElement('div');
             entryElement.innerHTML = `<b>First Name:</b> ${entry.firstName}<br><b>Last Name:</b>  ${entry.lastName}<br><b>Contact:</b>  ${entry.mobileNo}<br><b>E-mail: </b> ${entry.email}<br><b>Address: </b> ${entry.street},${entry.city},${entry.state},${entry.country}<br><b>Login ID:</b>  ${entry.loginId}<br><b>Password: </b> ${entry.password}`;
@@ -15,7 +17,7 @@ function fetchDataAndDisplay() {
     });
 }
 
-
+// Add event listener only when the DOM content is loaded
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('myForm').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -31,17 +33,26 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             body: JSON.stringify(jsonData),
         })
-        .then(response => response.json()) 
+        .then(response => response.json()) // Parse response as JSON
         .then(data => {
- 
+            document.getElementById('notification').style.display="block";
+            document.getElementById('notification').innerText = 'Data submitted successfully!';
             fetchDataAndDisplay();
+            setTimeout(function() {
+                document.getElementById('notification').style.display = 'none';
+            }, 2000);
         })
         .catch(error => {
             console.error('Error:', error);
+            document.getElementById('notification').style.display="block";
+            document.getElementById('notification').innerText = 'Something went wrong!';
+            setTimeout(function() {
+                document.getElementById('notification').style.display = 'none';
+            }, 2000);
         });
     });
 
-
+    // Fetch and display all data initially
     fetchDataAndDisplay();
 });
 
