@@ -5,13 +5,12 @@ const bodyParser = require("body-parser");
 const app = express();
 const port = 3000;
 
-// Connect to MongoDB
 mongoose
   .connect("mongodb+srv://ronaksaini783:E5HRj9QmIK1JsoYu@node-assignment-1.3t30enw.mongodb.net/?retryWrites=true&w=majority&appName=node-assignment-1")
   .then(() => console.log("Connected successfully to MongoDB"))
   .catch((err) => console.error("Error connecting to MongoDB:", err));
 
-// Define a schema for the user data
+
 const userSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
@@ -29,16 +28,13 @@ const userSchema = new mongoose.Schema({
   updationTime: { type: Date, default: Date.now },
 });
 
-// Define a model based on the schema
 const User = mongoose.model("User", userSchema);
 
-// Middleware to parse JSON bodies
+
 app.use(bodyParser.json());
 
-// Serve static files (HTML, JavaScript)
 app.use(express.static("public"));
 
-// Endpoint to get all submitted data
 app.get("/data", async (req, res) => {
   try {
     const allUsers = await User.find();
@@ -49,16 +45,16 @@ app.get("/data", async (req, res) => {
   }
 });
 
-// Endpoint to handle form submission
+
 app.post("/submit", async (req, res) => {
   try {
     const userData = req.body;
-    // Create a new user document using the model
+
     const newUser = new User(userData);
-    // Save the user document to the database
+
     await newUser.save();
     console.log("Data inserted successfully");
-    res.json(newUser); // Return the inserted user data as JSON
+    res.json(newUser);
   } catch (err) {
     console.error("Error occurred while inserting data into MongoDB", err);
     res.status(500).send("Error occurred while inserting data into MongoDB");
